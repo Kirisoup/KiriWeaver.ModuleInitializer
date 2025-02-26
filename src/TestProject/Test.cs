@@ -12,4 +12,3 @@ public static class VeryRandomClass
 
 	public static void Main() {}
 }
-

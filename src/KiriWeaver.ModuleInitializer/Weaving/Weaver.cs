@@ -2,7 +2,7 @@ using Microsoft.Build.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace KiriWeaver.ModuleInitializer;
+namespace KiriWeaver.ModuleInitializer.Weaving;
 
 public class Weaver : Microsoft.Build.Utilities.Task
 {
