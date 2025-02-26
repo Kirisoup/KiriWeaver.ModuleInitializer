@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask TaskName="Weaver"
+		AssemblyFile="$(MSBuildThisFileDirectory)net48\KiriWeaver.ModuleInitializer.dll" />
+
+	<Target Name="Weave" BeforeTargets="Build">
+		<Weaver 
+			InputAssembly="$(IntermediateOutputPath)$(TargetFileName)"
+			OutputAssembly="$(OutDir)$(TargetFileName)" />
+	</Target>
+</Project>

@@ -1,3 +1,5 @@
-pack
+pack/**/*.dll
+pack/**/*.pdb
+pack/**/*.nupkg
 bin
 obj
