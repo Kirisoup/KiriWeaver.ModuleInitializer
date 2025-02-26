@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Version>1.0.0</Version>
+		<Authors>KiriSoup</Authors>
+
+		<PackageId>$(RootNamespace)</PackageId>
+		<Description>Makes ModuleInitializer available in net4 using IL weaving</Description>
+		<!-- <RepositoryUrl>https://github.com/username/repository</RepositoryUrl> -->
+		<!-- <PackageLicenseExpression>MIT</PackageLicenseExpression> -->
+
+		<TargetFramework>net48</TargetFramework>
+
+	    <OutputPath Condition="'$(Configuration)' == 'Release'" >$(SolutionDir)pack/</OutputPath>
+		<PackageOutputPath>$(SolutionDir)pack/$(TargetFramework)</PackageOutputPath>
+
+		<LangVersion>preview</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    	<AssemblyName>$(RootNamespace)</AssemblyName>
+
+
+		<DefineConstants Condition="'$(Configuration)' == 'Debug'">DEBUG;TRACE</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)' == 'Release'">RELEASE</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PolySharp" Version="1.15.0" 
+			PrivateAssets="all" 
+			IncludeAssets="runtime; build; native; contentfiles; analyzers" />
+
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" 
+			PrivateAssets="all" />
+	</ItemGroup>
+</Project>
