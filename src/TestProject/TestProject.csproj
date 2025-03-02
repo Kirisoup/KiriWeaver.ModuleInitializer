@@ -10,10 +10,7 @@
 		<DefineConstants Condition="'$(Configuration)' == 'Release'">RELEASE</DefineConstants>
 	</PropertyGroup>
 
-	<!-- <Import Project="..\KiriWeaver.ModuleInitializer\build\net48\KiriWeaver.ModuleInitializer.Targets" /> -->
 	<ItemGroup>
 		<PackageReference Include="KiriWeaver.ModuleInitializer" Version="*" />
-		<!-- <Reference Include="MyLibrary" HintPath="..\..\pack\net48\KiriWeaver.ModuleInitializer.dll" /> -->
 	</ItemGroup>
-
 </Project>
