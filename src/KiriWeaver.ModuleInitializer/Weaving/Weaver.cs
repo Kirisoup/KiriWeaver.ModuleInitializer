@@ -1,6 +1,8 @@
+using System.Reflection;
 using Microsoft.Build.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using MethodAttributes = Mono.Cecil.MethodAttributes;
 
 namespace KiriWeaver.ModuleInitializer.Weaving;
 
@@ -18,14 +20,25 @@ public class Weaver : Microsoft.Build.Utilities.Task
             using var assembly = AssemblyDefinition.ReadAssembly(InputAssembly);
 			var attrType = typeof(ModuleInitializerAttribute).FullName;
 
-			var init = assembly.MainModule.GetTypes()
+			(var init, var attr) = assembly.MainModule.GetTypes()
 				.Where(t => t.IsAbstract && t.IsSealed)
 				.SelectMany(t => t.Methods)
-				.Where(m => m.IsStatic && m.Parameters.Count == 0 && m.CustomAttributes
-					.Any(attr => attr.AttributeType.FullName == attrType))
+				.Where(m => m.IsStatic && m.Parameters.Count == 0)
+				.Select(method => {
+					if (!method.IsStatic || method.Parameters.Count != 0) return
+						(default(MethodDefinition?), default(CustomAttribute?));
+					return (method, method.CustomAttributes
+						.FirstOrDefault(attr => attr.AttributeType.FullName == attrType));
+				})
 				.FirstOrDefault();
 
-			if (init is null) return true;
+			if (init is null || attr is null) return true;
+
+			init.CustomAttributes.Remove(attr);
+			var reference = assembly.MainModule.AssemblyReferences
+				.FirstOrDefault(r => r.Name == Assembly.GetExecutingAssembly().GetName().Name);
+			if (reference is not null) 
+				assembly.MainModule.AssemblyReferences.Remove(reference);
 
             var cctor = new MethodDefinition(
 				name: ".cctor", 
