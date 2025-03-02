@@ -24,13 +24,9 @@ public class Weaver : Microsoft.Build.Utilities.Task
 				.Where(t => t.IsAbstract && t.IsSealed)
 				.SelectMany(t => t.Methods)
 				.Where(m => m.IsStatic && m.Parameters.Count == 0)
-				.Select(method => {
-					if (!method.IsStatic || method.Parameters.Count != 0) return
-						(default(MethodDefinition?), default(CustomAttribute?));
-					return (method, method.CustomAttributes
-						.FirstOrDefault(attr => attr.AttributeType.FullName == attrType));
-				})
-				.FirstOrDefault();
+				.Select(method => (method, attr: method.CustomAttributes
+					.FirstOrDefault(attr => attr.AttributeType.FullName == attrType)))
+				.FirstOrDefault(method => method.attr is not null);
 
 			if (init is null || attr is null) return true;
 
