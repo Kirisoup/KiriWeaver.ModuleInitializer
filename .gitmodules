@@ -1,0 +1,9 @@
+[submodule "libs/KiriLib.ErrorHandling"]
+	path = libs/KiriLib.ErrorHandling
+	url = https://github.com/Kirisoup/KiriLib.ErrorHandling.git
+[submodule "liibs/KiriWeaver.Task"]
+	path = liibs/KiriWeaver.Task
+	url = https://github.com/Kirisoup/KiriWeaver.Task.git
+[submodule "libs/KiriWeaver.Task"]
+	path = libs/KiriWeaver.Task
+	url = https://github.com/Kirisoup/KiriWeaver.Task.git
