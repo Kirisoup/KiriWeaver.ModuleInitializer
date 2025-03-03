@@ -1,9 +1,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<UsingTask TaskName="KiriWeaver.ModuleInitializer.Weaving.Weaver"
+	<UsingTask TaskName="KiriWeaver.ModuleInitializer.Weaving.Task"
 		AssemblyFile="..\..\lib\net48\KiriWeaver.ModuleInitializer.dll" />
 
 	<Target Name="ModuleInitializer" BeforeTargets="Build">
-		<KiriWeaver.ModuleInitializer.Weaving.Weaver 
+		<KiriWeaver.ModuleInitializer.Weaving.Task 
 			InputAssembly="$(IntermediateOutputPath)$(TargetFileName)"
 			IntermediateAssembly = "$(IntermediateOutputPath)KiriWeaver/$(TargetFileName)"
 			OutputAssembly="$(OutDir)$(TargetFileName)" />
